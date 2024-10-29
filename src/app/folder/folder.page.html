@@ -14,8 +14,63 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div id="container" style="text-align: center; padding: 16px;">
+    <strong class="capitalize" style="font-size: 24px; font-weight: bold;">{{ folder }}</strong>
+    <!-- <p style="margin-bottom: 20px;">Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p> -->
+
+    <ion-card style="margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <ion-card-header>
+        <ion-card-title style="font-weight: bold;">Alfido Mazdan Marsyadi</ion-card-title>
+        <ion-card-subtitle>H1D022084</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+
+    <ion-list>
+      <ion-item *ngFor="let item of items" style="margin-bottom: 10px; border: 1px solid #ddd; border-radius: 8px; padding: 10px;">
+        <ion-thumbnail slot="start">
+          <img [src]="item.image || 'https://via.placeholder.com/150'" alt="{{ item.name }}" style="border-radius: 8px;">
+        </ion-thumbnail>
+        <ion-label>
+          <h2 style="font-weight: bold;">{{ item.name }}</h2>
+          <p>{{ item.details }}</p>
+        </ion-label>
+        <ion-buttons slot="end">
+          <ion-button (click)="editItem(item)" color="tertiary" fill="clear">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+          <ion-button (click)="deleteItem(item)" color="danger" fill="clear">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
+    </ion-list>
+
+    <ion-button expand="full" color="primary" (click)="addItem()" style="margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+      <ion-icon slot="start" name="add-outline"></ion-icon>
+      Add Item
+    </ion-button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-button expand="block" color="secondary" (click)="showToast()" style="border-radius: 8px;">
+            <ion-icon slot="start" name="information-circle-outline"></ion-icon>
+            Info
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button expand="block" color="danger" (click)="openAlert()" style="border-radius: 8px;">
+            <ion-icon slot="start" name="alert-circle-outline"></ion-icon>
+            Alert
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
+  <input type="file" accept="image/*" (change)="onImageSelected($event)" hidden #fileInput />
+  <!-- Button to trigger file input -->
+  <ion-button expand="full" color="primary" (click)="fileInput.click()" style="margin-bottom: 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <ion-icon slot="start" name="add-outline"></ion-icon>
+    Upload Image
+  </ion-button>
 </ion-content>
